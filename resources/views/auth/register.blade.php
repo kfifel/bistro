@@ -3,17 +3,17 @@
 @section('title', 'register')
 
 @section('content')
-    <section id="login" class=" w-full  bg-black text-red-500">
+    <section id="login" class="w-full bg-black text-red-500 ">
 
         <!-- wrapper -->
-        <div class=" p-5 lg:px-20 flex flex-col md:flex-row items-center justify-center">
+        <div class=" p-20 lg:px-20 flex flex-col md:flex-row justify-center">
 
             <!-- Contact Me -->
             <form action="{{ route('register') }}" method="POST" class="w-full md:w-1/2 border border-red-500 p-6 bg-gray-900">
 
                 @csrf
                 <h2 class="text-2xl pb-3 font-semibold text-center">
-                    Login
+                    Register
                 </h2>
                 <div>
                     <div class="flex flex-col mb-3">
