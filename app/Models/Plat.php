@@ -10,7 +10,9 @@ class Plat extends Model
     use HasFactory;
 
     protected $fillable = [
-
+        'title',
+        'description',
+        'image',
     ];
 
     public function user(){

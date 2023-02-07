@@ -15,7 +15,17 @@ class PlatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function index()
+    {
+        return view('plats.menu', ['plats'=>Plat::all()]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
         return view('plats.create');
     }
@@ -24,11 +34,20 @@ class PlatController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\PlatFormRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(PlatFormRequest $request)
     {
-        //
+        $platValid = $request->validated();
+
+        $platValid['image'] = $request->file('image')->store('public/images');
+
+        $plat = $request->user()->plats()->create($platValid);
+
+        return redirect()
+            ->route('plats.show', [$plat])
+            ->with('success', 'Plat has been added title = '.$plat->title. // this data well push in a temporary session
+                ' and description = '. $plat->description );
     }
 
     /**
@@ -39,7 +58,7 @@ class PlatController extends Controller
      */
     public function show(Plat $plat)
     {
-        return view('plats.show');
+        return view('plats.show', ['plat'=>$plat]);
     }
 
     /**
@@ -50,7 +69,7 @@ class PlatController extends Controller
      */
     public function edit(Plat $plat)
     {
-        return view('plats.edit');
+        return view('plats.edit',['plat'=>$plat]);
     }
 
     /**
