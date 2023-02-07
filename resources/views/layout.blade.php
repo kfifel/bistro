@@ -10,28 +10,50 @@
     <title>@yield('title', 'mahlaba')</title>
 </head>
 <body>
-    <div id="header" class="w-full flex flex-column justify-around items-center bg-teal-400">
-        <img src="{{ url('./images/logo.png') }}" alt="logo" class=" h-20 w-20">
-        <nav>
-            <ul class="flex gap-6">
-                <a href="{{ route('home') }}" class="px-6 py-2 {{ request()->routeIs('home') ? 'bg-orange-700 text-white ' : 'hover:bg-orange-600 hover:text-white' }}">
-                    <li>home</li>
-                </a>
-                <a href="{{ route('about') }}" class="px-6 py-2 {{ request()->routeIs('about') ? 'bg-orange-700 text-white ' : 'hover:bg-orange-600 hover:text-white' }}">
-                    <li>about us</li>
-                </a>
-                <a href="{{ route('login') }}" class="px-6 py-2 {{ request()->routeIs('login') ? 'bg-orange-700 text-white ' : 'hover:bg-orange-600 hover:text-white' }}">
-                    <li>Login</li>
-                </a>
-                <a href="{{ route('register') }}" class="px-6 py-2 {{ request()->routeIs('register') ? 'bg-orange-700 text-white ' : 'hover:bg-orange-600 hover:text-white' }}">
-                    <li>register</li>
-                </a>
-            </ul>
-        </nav>
+    <div id="header">
+        <nav class="bg-gray-600">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="flex h-16 items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <img class="h-20 w-20" src="{{ url('images/logo.png') }}" alt="bistro">
+                        </div>
+                        <div class="hidden md:block">
+                            <div class="ml-10 flex items-baseline space-x-4">
+                                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'bg-gray-900 text-white hover:text-white' : 'text-gray-300 hover:bg-gray-700' }} px-3 py-2 rounded-md text-sm font-medium">Home</a>
 
-        <a href="#">Hello Mr <strong>User's name</strong></a>
+                                <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'bg-gray-900 text-white hover:text-white' : 'text-gray-300 hover:bg-gray-700' }}  px-3 py-2 rounded-md text-sm font-medium">about</a>
+                                @auth
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        @method("DELETE")
+                                        <button class="{{ request()->routeIs('logout') ? 'bg-gray-900 text-white hover:text-white' : 'text-gray-300 hover:bg-gray-700' }} hover:text-white px-3 py-2 rounded-md text-sm font-medium">logout</button>
+                                    </form>
+                                @else
+                                <a href="{{ route('register') }}" class="{{ request()->routeIs('register') ? 'bg-gray-900 text-white hover:text-white' : 'text-gray-300 hover:bg-gray-700' }} px-3 py-2 rounded-md text-sm font-medium">register</a>
+
+                                <a href="{{ route('login') }}" class="{{ request()->routeIs('login') ? 'bg-gray-900 text-white hover:text-white' : 'text-gray-300 hover:bg-gray-700' }} px-3 py-2 rounded-md text-sm font-medium">login</a>
+                                @endauth
+                            </div>
+                        </div>
+                    </div>
+                        <div class="ml-4 flex items-center md:ml-6">
+                            <div class="relative ml-3">
+                                <div>
+                                    <a href="#" class="flex max-w-xs items-center rounded-full bg-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                        <span class="px-4">{{ \Illuminate\Support\Facades\Auth::user()->name }}</span>
+                                        <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </nav>
     </div>
-    <main class="bg-gray-400">
+
+    <main class="">
         @yield('content')
     </main>
 </body>
