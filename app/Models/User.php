@@ -43,6 +43,6 @@ class User extends Authenticatable
     ];
 
     public function plats(){
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Plat::class);
     }
 }
