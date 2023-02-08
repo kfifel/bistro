@@ -14,3 +14,20 @@ main{
 #login{
     min-height: calc(100vh - 4rem);
 }
+#card-items{
+    width: 16rem;
+    height: 20rem;
+
+}
+#card-image{
+    width: 14rem;
+    height: 10rem;
+}
+
+.card-image{
+    display: flex;
+    justify-content: center;
+}
+.toast-danger, .toast-success{
+
+}
