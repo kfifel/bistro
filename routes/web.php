@@ -14,7 +14,7 @@ Route::get('/about', function () {
 
 Route::resource('plats', PlatController::class)
     ->except([
-        'index', 'show'
+        'show'
     ])
     ->middleware(['auth']);
 Route::resource('plats', PlatController::class)
