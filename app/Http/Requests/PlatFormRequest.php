@@ -13,7 +13,9 @@ class PlatFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        if($this->user()->isAdmin)
+            return true;
+        abort(403);
     }
 
     /**
@@ -26,7 +28,7 @@ class PlatFormRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }

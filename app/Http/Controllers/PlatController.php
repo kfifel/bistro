@@ -25,8 +25,9 @@ class PlatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(PlatFormRequest $request)
     {
+        $request->authorize();
         return view('plats.create');
     }
 
@@ -38,9 +39,11 @@ class PlatController extends Controller
      */
     public function store(PlatFormRequest $request)
     {
+        $request->authorize();
         $platValid = $request->validated();
 
-        $platValid['image'] = $request->file('image')->store('public/images');
+        $platValid['image'] = $request->file('image')->store('public/images/plats');
+        $platValid['image'] =str_replace("public/images", "storage/images", $platValid['image']);
 
         $plat = $request->user()->plats()->create($platValid);
 
@@ -67,8 +70,9 @@ class PlatController extends Controller
      * @param  \App\Models\Plat  $plat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Plat $plat)
+    public function edit( PlatFormRequest $request , Plat $plat)
     {
+        $request->authorize();
         return view('plats.edit',['plat'=>$plat]);
     }
 
@@ -81,7 +85,19 @@ class PlatController extends Controller
      */
     public function update(PlatFormRequest $request, Plat $plat)
     {
-        //
+        $request->authorize();
+        $validated = $request->validated();
+
+        if($request->file('image')){
+            $validated['image'] = $request->file('image')->store('public/images/plats');
+            $validated['image'] =str_replace("public/images", "storage/images", $validated['image']);
+        }
+
+        $plat->update($validated);
+
+        return redirect()
+            ->route('plats.show', [$plat])
+            ->with('success', 'Plat is updated');
     }
 
     /**
@@ -90,8 +106,10 @@ class PlatController extends Controller
      * @param  \App\Models\Plat  $plat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Plat $plat)
+    public function destroy(PlatFormRequest $request, Plat $plat)
     {
-        //
+        $request->authorize();
+        $plat->delete();
+        return redirect()->route('plats.index');
     }
 }
