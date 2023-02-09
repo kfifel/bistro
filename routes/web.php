@@ -12,21 +12,24 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::resource('plats', PlatController::class)
-    ->except([
-        'show'
-    ])
-    ->middleware(['auth']);
-Route::resource('plats', PlatController::class)
-    ->only([
-        'show'
-    ]);
 
-Route::match(['GET', 'POST'], '/login',[AuthController::class, 'login'])
-    ->name('login');
+Route::middleware(['auth', 'isAdmin'])->group(function (){
+    Route::resource('plats', PlatController::class)
+        ->except(['index']);
+});
 
-Route::match(['GET', 'POST'], '/register', [AuthController::class, 'register'])
-    ->name('register');
+Route::middleware(['auth'])->group(function (){
+    Route::delete('/logout', [AuthController::class, 'logout'])
+        ->name('logout');
 
-Route::delete('/logout', [AuthController::class, 'logout'])
-    ->name('logout');
+    Route::resource('plats', PlatController::class)
+        ->only(['index']);
+});
+
+Route::middleware(['guest'])->group(function (){
+    Route::match(['GET', 'POST'], '/login',[AuthController::class, 'login'])
+        ->name('login');
+
+    Route::match(['GET', 'POST'], '/register', [AuthController::class, 'register'])
+        ->name('register');
+});
