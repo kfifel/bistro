@@ -25,9 +25,8 @@ class PlatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(PlatFormRequest $request)
+    public function create()
     {
-        $request->authorize();
         return view('plats.create');
     }
 
@@ -39,7 +38,6 @@ class PlatController extends Controller
      */
     public function store(PlatFormRequest $request)
     {
-        $request->authorize();
         $platValid = $request->validated();
 
         $platValid['image'] = $request->file('image')->store('public/images/plats');
@@ -70,9 +68,8 @@ class PlatController extends Controller
      * @param  \App\Models\Plat  $plat
      * @return \Illuminate\Http\Response
      */
-    public function edit( PlatFormRequest $request , Plat $plat)
+    public function edit( Plat $plat)
     {
-        $request->authorize();
         return view('plats.edit',['plat'=>$plat]);
     }
 
@@ -85,12 +82,16 @@ class PlatController extends Controller
      */
     public function update(PlatFormRequest $request, Plat $plat)
     {
-        $request->authorize();
         $validated = $request->validated();
 
         if($request->file('image')){
+            $oldImagePath = str_replace("storage/images/plats/", "public/images/plats/", $plat->image);
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+
             $validated['image'] = $request->file('image')->store('public/images/plats');
-            $validated['image'] =str_replace("public/images", "storage/images", $validated['image']);
+            $validated['image'] = str_replace("public/images", "storage/images", $validated['image']);
         }
 
         $plat->update($validated);
@@ -106,9 +107,8 @@ class PlatController extends Controller
      * @param  \App\Models\Plat  $plat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PlatFormRequest $request, Plat $plat)
+    public function destroy( Plat $plat )
     {
-        $request->authorize();
         $plat->delete();
         return redirect()->route('plats.index');
     }

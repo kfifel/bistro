@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PlatFormRequest extends FormRequest
 {
@@ -13,9 +14,7 @@ class PlatFormRequest extends FormRequest
      */
     public function authorize()
     {
-        if($this->user()->isAdmin)
-            return true;
-        abort(403);
+        return true;
     }
 
     /**
@@ -25,10 +24,26 @@ class PlatFormRequest extends FormRequest
      */
     public function rules()
     {
+        switch ($this->method()){
+            case 'POST' : {
+                return [
+                    'title' => 'required|string|max:255',
+                    'description' => 'required|string',
+                    'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ];
+            }
+            case 'PATCH':
+            case 'PUT' : {
+                return [
+                    'title' => 'required|string|max:255',
+                    'description' => 'required|string',
+                    'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ];
+            }
+            default: break;
+        }
         return [
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            //
         ];
     }
 }
