@@ -12,10 +12,9 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-
 Route::middleware(['auth', 'isAdmin'])->group(function (){
     Route::resource('plats', PlatController::class)
-        ->except(['index']);
+        ->except(['index', 'show']);
 });
 
 Route::middleware(['auth'])->group(function (){
@@ -23,7 +22,7 @@ Route::middleware(['auth'])->group(function (){
         ->name('logout');
 
     Route::resource('plats', PlatController::class)
-        ->only(['index']);
+        ->only(['show']);
 });
 
 Route::middleware(['guest'])->group(function (){
@@ -32,4 +31,8 @@ Route::middleware(['guest'])->group(function (){
 
     Route::match(['GET', 'POST'], '/register', [AuthController::class, 'register'])
         ->name('register');
+
 });
+
+    Route::resource('plats', PlatController::class)
+        ->only(['index']);
