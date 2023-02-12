@@ -20,8 +20,9 @@ main{
 
 }
 #card-image{
-    width: 14rem;
+    width: 15rem;
     height: 10rem;
+    margin-top: .5rem;
 }
 
 .card-image{
@@ -30,4 +31,22 @@ main{
 }
 .toast-danger, .toast-success{
 
+}
+body{
+    background-image: url("../images/pngegg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.bg_black{
+    position: fixed;
+    z-index: -1;
+
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: .6;
+}
+.about-page{
+    min-height: calc(100vh - 4rem);
 }

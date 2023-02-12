@@ -11,11 +11,14 @@
     <title>@yield('title', 'mahlaba')</title>
 </head>
 <body>
+<div class="bg_black">
+
+</div>
     <div id="header">
         <nav class="bg-gray-600">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="h-16">
-                    <div class="flex items-center justify-between">
+                <div class="">
+                    <div class="flex justify-between items-center">
                         <div class="flex-shrink-0">
                             <img class="h-20 w-20" src="{{ url('images/logo.png') }}" alt="bistro">
                         </div>
@@ -24,13 +27,13 @@
                                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                                 <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'bg-orange-600 text-white hover:text-white' : 'text-orange-600 hover:bg-gray-700' }} px-3 py-2 rounded-md text-sm font-medium">Home</a>
 
-                                <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'bg-orange-600 text-white hover:text-white' : 'text-orange-600 hover:bg-gray-700' }}  px-3 py-2 rounded-md text-sm font-medium">About</a>
-
                                 <a href="{{ route('plats.index') }}" class="{{ request()->routeIs('plats.index') ? 'bg-orange-600 text-white hover:text-white' : 'text-orange-600 hover:bg-gray-700' }}  px-3 py-2 rounded-md text-sm font-medium">Plats</a>
+
+                                <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'bg-orange-600 text-white hover:text-white' : 'text-orange-600 hover:bg-gray-700' }}  px-3 py-2 rounded-md text-sm font-medium">About</a>
                             </div>
                         </div>
                     @auth
-                        <div class="container">
+                        <div class="flex">
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 @method("DELETE")
@@ -39,9 +42,9 @@
                             <div class="ml-4 flex items-center md:ml-6">
                                 <div class="relative ml-3">
                                     <div>
-                                        <a href="#" class="flex max-w-xs items-center rounded-full bg-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                            <span class="px-4 text-white">{{ \Illuminate\Support\Facades\Auth::user()->name }}</span>
-                                            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                        <a href="{{ route('profile.index') }}" class="flex max-w-xs items-center rounded-full bg-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                            <span class="px-4 text-white">{{ Auth::user()->name }}</span>
+                                            <img class="h-8 w-8 rounded-full" src="https://imgs.search.brave.com/TJbEC2gu0jg48EgjTbPXP8dKFUXxopHDI9yURY4DoW8/rs:fit:200:200:1/g:ce/aHR0cDovL3d3dy5u/ZXdkZXNpZ25maWxl/LmNvbS9wb3N0cGlj/LzIwMDkvMDkvZ2Vu/ZXJpYy11c2VyLXBy/b2ZpbGVfMzU0MTg0/LnBuZw" alt="">
                                         </a>
                                     </div>
                                 </div>
