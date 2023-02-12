@@ -3,7 +3,7 @@
 @section('title', 'login')
 
 @section('content')
-    <section id="login" class="w-full bg-gray-500 text-gray-200 ">
+    <section id="login" class="w-full  text-gray-200 ">
 
         <!-- wrapper -->
         <div class=" p-20 lg:px-20 flex flex-col md:flex-row justify-center">
@@ -15,7 +15,7 @@
                     @includeWhen($errors->any(), '_error')
                 </div>
                 @csrf
-                <h2 class="text-3xl text-orange-500 pb-3 font-semibold text-center">
+                <h2 class="text-3xl pb-3 font-semibold text-center">
                     Login
                 </h2>
                 <div>
@@ -69,6 +69,10 @@
                     <button type="submit" class="w-full bg-gray-900 border border-gray-200 px-4 py-2 transition duration-50 focus:outline-none font-semibold hover:bg-green-600 hover:text-white text-xl cursor-pointer">
                         Connect
                     </button>
+                </div>
+                <div class="flex justify-between text-orange-500 pt-4">
+                    <a href="{{ route('password.request') }}">forget password</a>
+                    <a href="{{ route('register') }}">sign up</a>
                 </div>
             </form>
         </div>

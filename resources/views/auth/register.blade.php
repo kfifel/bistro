@@ -9,7 +9,7 @@
         <div class=" p-20 lg:px-20 flex flex-col md:flex-row justify-center">
 
             <!-- Contact Me -->
-            <form action="{{ route('register') }}" method="POST" class="w-full md:w-1/2 border @if($errors->any()) border-red-500 @else border-black @endif p-6 bg-gray-700"">
+            <form action="{{ route('register') }}" method="POST" class="w-full md:w-1/2 border @if($errors->any()) border-red-500 @else border-black @endif p-6 bg-gray-700">
 
                 @csrf
                 <h2 class="text-2xl pb-3 font-semibold text-center">
@@ -83,6 +83,12 @@
                         Register
                     </button>
                 </div>
+            <div class="pt-4">
+                Or
+                <span class="text-orange-500">
+                    <a href="{{ route('login') }}">login</a>
+                </span>
+            </div>
             </form>
         </div>
     </section>
