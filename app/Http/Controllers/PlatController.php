@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Plat;
 use App\Http\Requests\PlatFormRequest;
-use App\Http\Requests\UpdatePlatRequest;
-use http\Client\Request;
+use Illuminate\Http\Response;
 
 class PlatController extends Controller
 {
@@ -13,17 +12,17 @@ class PlatController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
-        return view('plats.menu', ['plats'=>Plat::all()]);
+        return view('plats.menu', ['plats'=>Plat::all()]); // paginate(10)
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -33,7 +32,7 @@ class PlatController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\PlatFormRequest  $request
+     * @param PlatFormRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(PlatFormRequest $request)
@@ -54,8 +53,8 @@ class PlatController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Plat  $plat
-     * @return \Illuminate\Http\Response
+     * @param Plat $plat
+     * @return Response
      */
     public function show(Plat $plat)
     {
@@ -65,8 +64,8 @@ class PlatController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Plat  $plat
-     * @return \Illuminate\Http\Response
+     * @param Plat $plat
+     * @return Response
      */
     public function edit( Plat $plat)
     {
@@ -76,9 +75,9 @@ class PlatController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePlatRequest  $request
-     * @param  \App\Models\Plat  $plat
-     * @return \Illuminate\Http\Response
+     * @param PlatFormRequest $request
+     * @param Plat $plat
+     * @return Response
      */
     public function update(PlatFormRequest $request, Plat $plat)
     {
@@ -104,8 +103,8 @@ class PlatController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Plat  $plat
-     * @return \Illuminate\Http\Response
+     * @param Plat $plat
+     * @return Response
      */
     public function destroy( Plat $plat )
     {

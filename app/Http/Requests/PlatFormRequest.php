@@ -28,7 +28,7 @@ class PlatFormRequest extends FormRequest
             case 'POST' : {
                 return [
                     'title' => 'required|string|max:255',
-                    'description' => 'required|string',
+                    'description' => 'required|string|min:10',
                     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ];
             }
@@ -36,7 +36,7 @@ class PlatFormRequest extends FormRequest
             case 'PUT' : {
                 return [
                     'title' => 'required|string|max:255',
-                    'description' => 'required|string',
+                    'description' => 'required|string|min:10',
                     'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ];
             }

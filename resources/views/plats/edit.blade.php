@@ -9,7 +9,12 @@
             @csrf
             @method('PUT')
             <input type="text" name="title" class="b-black" value="{{ old('title', $plat->title) }}">
-            <input type="text" name="description" value="{{ old('description', $plat->description) }}">
+            <textarea
+                name="description"
+                rows="6"
+            >
+                {{ old('description', $plat->description) }}
+            </textarea>
             <input type="file" name="image">
 
             <button class="py-2 bg-blue-500 text-white text-bold text-xl hover:bg-blue-700 hover:rounded-xl">
