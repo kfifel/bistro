@@ -3,7 +3,7 @@
 @section('title', 'Profile')
 
 @section('breadcrumbs')
-    @include('layouts.breadcrumbs', [ 'breadcrumbs' => ['Profile'] ]  )
+    @include('layouts.breadcrumbs', [ 'breadcrumbs' => ['profile'] ]  )
 @endsection
 
 @section('content')
@@ -86,7 +86,7 @@
                 </h2>
                 <div>
                     <div class="flex flex-col mb-3">
-                        <label for="password">Old password</label>
+                        <label for="password">Current password</label>
                         <input
                             type="password" id="password" name="password"
                             class="px-3 py-2 bg-gray-800 border
