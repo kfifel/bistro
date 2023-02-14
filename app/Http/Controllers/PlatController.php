@@ -117,11 +117,11 @@ class PlatController extends Controller
             Plat::where('id', $id)->withTrashed()->restore();
 
             return redirect()->route('plats.index')
-                ->with('success', 'User force deleted successfully.');
+                ->with('success', 'Plat has been restored successfully.');
         } catch (\Exception $e) {
 
             return redirect()->back()
-                ->withErrors(['error'=> "Error restoring plat: {$e->getMessage()}"]);
+                ->withErrors(['error'=> "Error in restoring plat: {$e->getMessage()}"]);
         }
     }
 
@@ -138,7 +138,7 @@ class PlatController extends Controller
             Plat::where('id', $id)->withTrashed()->forceDelete();
 
             return redirect()->route('plats.index')
-                ->with('success', 'User force deleted successfully.');
+                ->with('success', 'Plat force deleted successfully.');
         } catch (\Exception $e) {
 
             return redirect()->back()
@@ -155,6 +155,7 @@ class PlatController extends Controller
     public function destroy( Plat $plat )
     {
         $plat->delete();
-        return redirect()->route('plats.index');
+        return redirect()->route('plats.index')
+            ->with(['success'=>'Plat has been moved to trash']);
     }
 }

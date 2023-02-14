@@ -29,7 +29,7 @@ class PlatFormRequest extends FormRequest
                 return [
                     'title' => 'required|string|max:255',
                     'description' => 'required|string|min:10',
-                    'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
                 ];
             }
             case 'PATCH':
@@ -37,7 +37,7 @@ class PlatFormRequest extends FormRequest
                 return [
                     'title' => 'required|string|max:255',
                     'description' => 'required|string|min:10',
-                    'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
                 ];
             }
             default: break;

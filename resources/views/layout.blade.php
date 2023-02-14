@@ -23,14 +23,35 @@
                         <div class="flex-shrink-0">
                             <img class="h-20 w-20" src="{{ url('images/logo.png') }}" alt="bistro">
                         </div>
-                        <div class="hidden md:block">
+                        <div class="">
                             <div class="ml-10 flex items-baseline space-x-4 ">
                                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'bg-orange-600 text-white hover:text-white' : 'text-orange-600 hover:bg-gray-700' }} px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                                <a href="{{ route('home') }}"
+                                   class="{{ request()->routeIs('home')
+                                            ? 'bg-orange-600 text-white hover:text-white'
+                                            : 'text-orange-600 hover:bg-gray-700' }}
+                                            px-3 py-2 rounded-md text-sm font-medium flex justify-center items-center gap-1">
+                                    <i class="fas fa-solid fa-home "></i>
+                                    <span class="hidden md:block">Home</span>
+                                </a>
 
-                                <a href="{{ route('plats.index') }}" class="{{ request()->routeIs('plats.index') ? 'bg-orange-600 text-white hover:text-white' : 'text-orange-600 hover:bg-gray-700' }}  px-3 py-2 rounded-md text-sm font-medium">Plats</a>
+                                <a href="{{ route('plats.index') }}"
+                                   class="{{ request()->routeIs('plats.index')
+                                    ? 'bg-orange-600 text-white hover:text-white'
+                                    : 'text-orange-600 hover:bg-gray-700' }}
+                                    px-3 py-2 rounded-md text-sm font-medium flex justify-center items-center gap-2">
+                                        <i class="fas fa-solid fa-info "></i>
+                                        <span class="hidden md:block">plats</span>
+                                </a>
 
-                                <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'bg-orange-600 text-white hover:text-white' : 'text-orange-600 hover:bg-gray-700' }}  px-3 py-2 rounded-md text-sm font-medium">About</a>
+                                <a href="{{ route('about') }}"
+                                   class="{{ request()->routeIs('about')
+                                    ? 'bg-orange-600 text-white hover:text-white'
+                                    : 'text-orange-600 hover:bg-gray-700' }}
+                                     px-3 py-2 rounded-md text-sm font-medium flex justify-center items-center gap-2">
+                                    <i class="fas fa-solid fa-turkey"></i>
+                                    <span class="hidden md:block">About</span>
+                                </a>
                             </div>
                         </div>
                     @auth
@@ -65,8 +86,11 @@
     </div>
 
     <main class=" p-6">
+
+        @yield('breadcrumbs')
+
         @if(session('success'))
-            <div id="toast-success" class="flex items-center w-full p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+            <div id="toast-success" class="flex items-center w-full p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 mt-4" role="alert">
                 <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
                     <span class="sr-only">Check icon</span>
@@ -78,7 +102,7 @@
                 </button>
             </div>
         @elseif(session('error'))
-            <div id="toast-danger" class="flex items-center w-full p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+            <div id="toast-danger" class="flex items-center w-full p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 mt-4" role="alert">
                 <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     <span class="sr-only">Error icon</span>
@@ -91,7 +115,6 @@
             </div>
         @endif
 
-        @yield('breadcrumbs')
 
         @yield('content')
 

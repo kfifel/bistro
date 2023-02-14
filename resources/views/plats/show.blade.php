@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <div class="max-w-sm mx-auto mt-8 bg-white rounded-lg shadow-lg overflow-hidden">
-        <img class="w-full h-56 object-cover object-center" src="{{ asset($plat->image) }}" alt="{{ $plat->title }}">
+    <div class="max-w-lg mx-auto mt-8 bg-white rounded-lg shadow-lg overflow-hidden">
+        <img class="w-full h-70 object-cover object-center" src="{{ asset($plat->image) }}" alt="{{ $plat->title }}">
         <div class="p-6">
             <h2 class="text-xl font-bold text-gray-900">{{ $plat->title }}</h2>
             <p class="mt-2 text-gray-600">{{ $plat->description }}</p>

@@ -12,12 +12,14 @@
         <div class="flex justify-between mb-4 my-6">
             <a href="{{ route('plats.create') }}">
                 <button class="px-6 py-2 text-white bg-orange-600 rounded-sm hover:bg-orange-700 focus:outline-none focus:ring-4">
+                    <i class="fas fa-solid fa-plus"></i>
                     Add Plat
                 </button>
             </a>
             <a href="{{ route('plats.deleted') }}">
                 <button class="px-6 py-2 text-white bg-orange-600 rounded-sm hover:bg-orange-700 focus:outline-none focus:ring-4">
                     Trashed Plats
+                    <i class="fas fa-trash"></i>
                 </button>
             </a>
         </div>

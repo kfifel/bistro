@@ -48,8 +48,8 @@
             @empty
                 <tr>
                     <td colspan="3" class="text-center mt-10">
-                        <p class="text-3xl font-medium text-gray-700">No Plats Found</p>
-                        <p class="text-xl text-gray-500">It looks like there are no plats to display.</p>
+                        <p class="text-3xl font-medium text-gray-300">No Plats Found</p>
+                        <p class="text-xl text-gray-200">It looks like there are no plats to display.</p>
                     </td>
                 </tr>
             @endforelse
