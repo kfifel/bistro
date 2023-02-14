@@ -2,7 +2,13 @@
 
 @section('title', 'create plat')
 
+@section('breadcrumbs')
+    @include('layouts.breadcrumbs', [ 'breadcrumbs' => ['plats', 'edit'] ]  )
+@endsection
 @section('content')
+
+    <h1 class="text-2xl text-white py-3">Edit Plats</h1>
+
     <div class="m-6 p-6">
         <form action="{{ route('plats.update', $plat) }}" method="POST"
               enctype="multipart/form-data" class="flex flex-col gap-6">
@@ -17,7 +23,7 @@
             </textarea>
             <input type="file" name="image">
 
-            <button class="py-2 bg-blue-500 text-white text-bold text-xl hover:bg-blue-700 hover:rounded-xl">
+            <button class="py-2 bg-orange-600 text-white text-bold text-xl hover:bg-orange-700 ">
                 save
             </button>
         </form>
