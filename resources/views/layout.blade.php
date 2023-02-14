@@ -40,8 +40,8 @@
                                     ? 'bg-orange-600 text-white hover:text-white'
                                     : 'text-orange-600 hover:bg-gray-700' }}
                                     px-3 py-2 rounded-md text-sm font-medium flex justify-center items-center gap-2">
-                                        <i class="fas fa-solid fa-info "></i>
-                                        <span class="hidden md:block">plats</span>
+                                        <i class="fas fa-solid fa-utensils "></i>
+                                        <span class="hidden md:block">Plats</span>
                                 </a>
 
                                 <a href="{{ route('about') }}"
@@ -49,7 +49,7 @@
                                     ? 'bg-orange-600 text-white hover:text-white'
                                     : 'text-orange-600 hover:bg-gray-700' }}
                                      px-3 py-2 rounded-md text-sm font-medium flex justify-center items-center gap-2">
-                                    <i class="fas fa-solid fa-turkey"></i>
+                                    <i class="fas fa-solid fa-info"></i>
                                     <span class="hidden md:block">About</span>
                                 </a>
                             </div>
@@ -59,7 +59,10 @@
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 @method("DELETE")
-                                <button class="{{ request()->routeIs('logout') ? 'bg-orange-600 text-white hover:text-white' : 'text-orange-600 hover:bg-gray-700' }} hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>
+                                <button class="{{ request()->routeIs('logout') ? 'bg-orange-600 text-white hover:text-white' : 'text-orange-600 hover:bg-gray-700' }} hover:text-white px-3 py-2 rounded-md text-sm font-medium flex justify-center items-center gap-2">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    <span class="hidden md:block">logout</span>
+                                </button>
                             </form>
                             <div class="ml-4 flex items-center md:ml-6">
                                 <div class="relative ml-3">
