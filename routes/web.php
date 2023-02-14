@@ -18,6 +18,16 @@ Route::resource('plats', PlatController::class)
 Route::middleware(['auth', 'isAdmin'])->group(function (){
     Route::resource('plats', PlatController::class)
         ->except(['index', 'show']);
+
+    Route::get('/plats/deleted', [PlatController::class, 'showPlatsDeleted'])
+        ->name('plats.deleted');
+
+    Route::delete('/plats/{plat}/force-delete', [PlatController::class, 'forceDelete'])
+        ->name('plats.forceDelete');
+
+    Route::post('/plats/{plat}/restore', [PlatController::class, 'restore'])
+        ->name('plats.restore');
+
 });
 
 Route::middleware(['auth'])->group(function (){

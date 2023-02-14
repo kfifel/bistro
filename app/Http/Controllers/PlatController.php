@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Plat;
 use App\Http\Requests\PlatFormRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
 class PlatController extends Controller
@@ -17,6 +18,16 @@ class PlatController extends Controller
     public function index()
     {
         return view('plats.menu', ['plats'=>Plat::all()]); // paginate(10)
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function showPlatsDeleted()
+    {
+        $plats = Plat::onlyTrashed()->get();
+        return view('plats.trash-list',['plats'=>$plats]);
     }
 
     /**
@@ -33,7 +44,7 @@ class PlatController extends Controller
      * Store a newly created resource in storage.
      *
      * @param PlatFormRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(PlatFormRequest $request)
     {
@@ -77,7 +88,7 @@ class PlatController extends Controller
      *
      * @param PlatFormRequest $request
      * @param Plat $plat
-     * @return Response
+     * @return RedirectResponse
      */
     public function update(PlatFormRequest $request, Plat $plat)
     {
@@ -100,11 +111,46 @@ class PlatController extends Controller
             ->with('success', 'Plat is updated');
     }
 
+    public function restore($id)
+    {
+        try {
+            Plat::where('id', $id)->withTrashed()->restore();
+
+            return redirect()->route('plats.index')
+                ->with('success', 'User force deleted successfully.');
+        } catch (\Exception $e) {
+
+            return redirect()->back()
+                ->withErrors(['error'=> "Error restoring plat: {$e->getMessage()}"]);
+        }
+    }
+
+    /**
+     * Force delete user data
+     *
+     * @param numeric $plat
+     *
+     * @return RedirectResponse
+     */
+    public function forceDelete($id)
+    {
+        try {
+            Plat::where('id', $id)->withTrashed()->forceDelete();
+
+            return redirect()->route('plats.index')
+                ->with('success', 'User force deleted successfully.');
+        } catch (\Exception $e) {
+
+            return redirect()->back()
+                ->withErrors(['error'=> "Error in deleting plat: {$e->getMessage()}"]);
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param Plat $plat
-     * @return Response
+     * @return RedirectResponse
      */
     public function destroy( Plat $plat )
     {
