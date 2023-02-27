@@ -7,6 +7,7 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
@@ -37,6 +38,8 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        Log::alert('request for login  ');
+
         if ($request->isMethod('get')) {
             return view('auth.login');
         }
